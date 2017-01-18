@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 import os, sys
 import configparser
 
@@ -28,6 +29,13 @@ def color_handler(color_val):
     elif color_val is 'Black on White':
         return 'color F0'
 
+def ask_reset():
+    result = messagebox.askquestion("Reset Settings", "Are You Sure?", icon='warning')
+    if result is 'yes':
+        default_settings()
+    else:
+        pass
+
 def default_settings():
     config = configparser.ConfigParser()
     settings = config['SETTINGS']
@@ -41,15 +49,15 @@ def default_settings():
 def apply_settings(settings_list):
     config = configparser.ConfigParser()
     settings = config['SETTINGS']
-    settings['color'] = settings_list[0]
+    settings['color'] = color_handler(settings_list[0])
     settings['starting_dir'] = settings_list[1]
     settings['height'] = settings_list[3]
     settings['width'] = settings_list[2]
     with open('settings.ini', 'w') as configfile:
         config.write(configfile)
 
-appdata = os.getenv('APPDATA')
-icon = r'{}/winguake/icon.ico'.format(appdata)
+print(os.path.dirname(os.path.abspath(__file__)))
+icon = r'{}/guake_icon.ico'.format(os.path.dirname(os.path.abspath(__file__)))
 
 root = Tk()
 
@@ -81,6 +89,7 @@ height_box.grid(row=3, column=1)
 button = Button(root, text="Apply", command=get_vars)
 button.grid(row=5)
 
+reset_buttom = Button(root, text="Reset Settings", command=ask_reset).grid(row=5, column=1)
 root.title("WinGuake Settings")
 try:
     root.iconbitmap(icon)

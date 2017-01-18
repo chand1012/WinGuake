@@ -22,4 +22,4 @@ def main(home, color):
     os.system('color {}'.format(color))
 
 win32gui.EnumWindows(enumHandler, None)
-main(None, '0b')
+main(None, '0a')
