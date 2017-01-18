@@ -1,5 +1,6 @@
 from tkinter import *
 import os, sys
+import configparser
 
 def replace_line(file_name, line_num, text):
     lines = open(file_name, 'r').readlines()
@@ -26,6 +27,16 @@ def color_handler(color_val):
         return 'color 07'
     elif color_val is 'Black on White':
         return 'color F0'
+
+def apply_settings(settings_list):
+    config = configparser.ConfigParser()
+    settings = config['SETTINGS']
+    settings['color'] = settings_list[0]
+    settings['starting_dir'] = settings_list[1]
+    settings['height'] = settings_list[3]
+    settings['width'] = settings_list[2]
+    with open('settings.ini', 'w') as configfile:
+        config.write(configfile)
 
 appdata = os.getenv('APPDATA')
 icon = r'{}/winguake/icon.ico'.format(appdata)
