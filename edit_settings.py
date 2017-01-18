@@ -32,7 +32,7 @@ def default_settings():
     config = configparser.ConfigParser()
     settings = config['SETTINGS']
     settings['color'] = 'color 0a'
-    settings['starting_dir'] = os.getenv('USERPROFILE')
+    settings['starting_dir'] = str(os.getenv('USERPROFILE'))
     settings['height'] = 'None'
     settings['width'] = 'None'
     with open('settings.ini', 'w') as configfile:
