@@ -27,7 +27,6 @@ def color_handler(color_val):
     elif color_val is 'Black on White':
         return 'color F0'
 
-global icon
 appdata = os.getenv('APPDATA')
 icon = r'{}/winguake/icon.ico'.format(appdata)
 
@@ -57,7 +56,6 @@ height_text.grid(row=3)
 height_var = StringVar()
 height_box = Entry(root, bd=3, textvariable=height_var)
 height_box.grid(row=3, column=1)
-
 
 button = Button(root, text="Apply", command=get_vars)
 button.grid(row=5)

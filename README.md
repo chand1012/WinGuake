@@ -10,5 +10,6 @@ Double click Console.ahk or run guake.bat and just press Ctrl+Alt+T. Something l
 To exit, just type `exit` into the console. AutoHotKey will run in the background for when you need to bring up the CMD again.
 # Planned Features
 - Add settings.ini and a Settings GUI
+- Finish Settings editor
 - Custom starting directories and color changing
 - Pre-compiled installer
