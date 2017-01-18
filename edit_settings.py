@@ -28,6 +28,16 @@ def color_handler(color_val):
     elif color_val is 'Black on White':
         return 'color F0'
 
+def default_settings():
+    config = configparser.ConfigParser()
+    settings = config['SETTINGS']
+    settings['color'] = 'color 0a'
+    settings['starting_dir'] = os.getenv('USERPROFILE')
+    settings['height'] = 'None'
+    settings['width'] = 'None'
+    with open('settings.ini', 'w') as configfile:
+        config.write(configfile)
+
 def apply_settings(settings_list):
     config = configparser.ConfigParser()
     settings = config['SETTINGS']
