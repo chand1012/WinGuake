@@ -1,14 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import os, sys
-import configparser
-
-def replace_line(file_name, line_num, text):
-    lines = open(file_name, 'r').readlines()
-    lines[line_num] = text
-    out = open(file_name, 'w')
-    out.writelines(lines)
-    out.close()
+import json
 
 def get_vars():
     global arguments
@@ -19,43 +12,50 @@ def get_vars():
 
 def color_handler(color_val):
     if color_val is 'Green':
-        return 'color 0a'
+        return '0a'
     elif color_val is 'Blue':
-        return 'color 01'
+        return '01'
     elif color_val is 'Red':
-        return 'color 04'
+        return '04'
     elif color_val is 'White':
-        return 'color 07'
+        return '07'
     elif color_val is 'Black on White':
-        return 'color F0'
+        return 'F0'
 
 def ask_reset():
     result = messagebox.askquestion("Reset Settings", "Are You Sure?", icon='warning')
-    if result is 'yes':
+    print(result)
+    if 'yes' in result:
         default_settings()
-    else:
-        pass
 
 def default_settings():
-    config = configparser.ConfigParser()
-    settings = config['SETTINGS']
-    settings['color'] = 'color 0a'
-    settings['starting_dir'] = str(os.getenv('USERPROFILE'))
-    settings['height'] = 'None'
-    settings['width'] = 'None'
-    with open('settings.ini', 'w') as configfile:
-        config.write(configfile)
+    #rewrite in JSON
+    data = {}
+    data['color'] = '0a'
+    data['directory'] = ''
+    data['width'] = ''
+    data['height'] = ''
+    json_data = json.dumps(data)
+    json_file = open('settings.json', 'w')
+    json_file.write(json_data)
+    json_file.close()
+    messagebox.showinfo('WinGuake', 'Settings will be applied on next WinGuake restart.')
+    sys.exit()
 
 def apply_settings(settings_list):
-    config = configparser.ConfigParser()
-    settings = config['SETTINGS']
-    settings['color'] = color_handler(settings_list[0])
-    settings['starting_dir'] = settings_list[1]
-    settings['height'] = settings_list[3]
-    settings['width'] = settings_list[2]
-    with open('settings.ini', 'w') as configfile:
-        config.write(configfile)
-
+    #rewrite in JSON
+    data = {}
+    data['color'] = settings_list[0]
+    data['directory'] = settings_list[1]
+    data['width'] = settings_list[2]
+    data['height'] = settings_list[3]
+    json_data = json.dumps(data)
+    json_file = open('settings.json', 'w')
+    json_file.write(json_data)
+    json_file.close()
+    messagebox.showinfo("WinGuake", "Settings will be applied on next WinGuake restart.")
+    sys.exit()
+    
 print(os.path.dirname(os.path.abspath(__file__)))
 icon = r'{}/guake_icon.ico'.format(os.path.dirname(os.path.abspath(__file__)))
 
@@ -86,8 +86,7 @@ height_var = StringVar()
 height_box = Entry(root, bd=3, textvariable=height_var)
 height_box.grid(row=3, column=1)
 
-button = Button(root, text="Apply", command=get_vars)
-button.grid(row=5)
+apply_button = Button(root, text="Apply", command= lambda: apply_settings([color_handler(color.get()), dir_var.get(), width_var.get(), height_var.get()])).grid(row=5) #1: color, 2: directory, 3: width, 4: height
 
 reset_buttom = Button(root, text="Reset Settings", command=ask_reset).grid(row=5, column=1)
 root.title("WinGuake Settings")
