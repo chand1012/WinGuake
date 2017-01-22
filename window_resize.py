@@ -42,8 +42,8 @@ def enumHandler(hwnd, lParam):
             else:
                 json_file = open('settings.json')
                 settings = json.loads(json_file.read())
-                w_width = settings['width']
-                w_height = settings['height']
+                w_width = int(settings['width'])
+                w_height = int(settings['height'])
             win32gui.MoveWindow(hwnd, 0, 0, w_width, w_length, True)
 
 def main(home, color): # needs redone
