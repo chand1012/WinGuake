@@ -15,6 +15,7 @@ def is_default():
         return True
     else:
         return False
+    json_file.close()
 
 def settings_check():
     exists = os.path.isfile('./settings.json')
@@ -36,8 +37,11 @@ def enumHandler(hwnd, lParam):
             settings_check()
             m_width = win32api.GetSystemMetrics(0)
             m_length = win32api.GetSystemMetrics(1)
-            if is_default() is True:
+            json_file = open('settings.json')
+            json_data = json.loads(json_file.read)
+            if json_data['width'] is '':
                 w_width = int(m_width)
+            if json_data['height'] is '':
                 w_length = int(m_length/2)
             else:
                 json_file = open('settings.json')
