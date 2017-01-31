@@ -2,7 +2,7 @@
 A Windows-oriented version of the popular Guake Terminal for Linux. Check out the original Linux version here: https://github.com/Guake/guake/
 
 # Get Pre-compiled Version
-- Download from [here](https://www.dropbox.com/s/k770odk34b3uyg2/winguake.zip?dl=1).
+- Download from [here](https://github.com/chand1012/winguake/releases).
 - Extract the zip to the directory of your choice
 - Run console.exe
 - Press Ctrl+Alt+T to start up the console
