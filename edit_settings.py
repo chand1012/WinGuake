@@ -55,8 +55,8 @@ def apply_settings(settings_list):
     json_file.close()
     messagebox.showinfo("WinGuake", "Settings will be applied on next WinGuake restart.")
     sys.exit()
-    
-print(os.path.dirname(os.path.abspath(__file__)))
+
+#print(os.path.dirname(os.path.abspath(__file__)))
 icon = r'{}/guake_icon.ico'.format(os.path.dirname(os.path.abspath(__file__)))
 
 root = Tk()
