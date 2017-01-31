@@ -1,0 +1,3 @@
+combine start_winguake.bat and guake.py and compile
+get settings working correctly
+find way to easily save last directory
