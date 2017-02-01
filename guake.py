@@ -1,7 +1,6 @@
 import os, sys
 import argparse
 import subprocess
-import json
 #command line handler
 parser = argparse.ArgumentParser(description="Guake for Windows")
 parser.add_argument('-s', '--settings', help="Open settings", action='store_true')
