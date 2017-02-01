@@ -1,7 +1,7 @@
 # WinGuake
 A Windows-oriented version of the popular Guake Terminal for Linux.
 ![](http://i.imgur.com/iEoAsA2.png)
-Check out the original Linux version here: https://github.com/Guake/guake/
+Check out the original Linux version [here](https://github.com/Guake/guake/).
 
 # Get Pre-compiled Version
 - Download from the [releases](https://github.com/chand1012/winguake/releases) tab.
