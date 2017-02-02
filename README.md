@@ -1,9 +1,14 @@
 # WinGuake
-A Windows-oriented version of the popular Guake Terminal for Linux. 
+A Windows-oriented version of the popular Guake Terminal for Linux.
 
 <img src="http://i.imgur.com/iEoAsA2.png" height=100 width=100></img>
 
 Check out the original Linux version here: https://github.com/Guake/guake/
+
+# What is it?
+Remember the days when playing Quake (or even as recent as CS:GO) where you pressed a key and the console came up? Wouldn't it be very convenient if Windows did this?
+**Enter WinGuake**
+WinGuake is a Windows version of the popular [Guake Terminal](https://github.com/Guake/guake/) for Linux. It allows you to use the Windows Command Prompt with just a few button presses, and to hide it just as easy!
 
 # Get Pre-compiled Version
 - Download from the [releases](https://github.com/chand1012/winguake/releases) tab.
