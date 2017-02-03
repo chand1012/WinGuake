@@ -22,7 +22,7 @@ WinGuake is a Windows version of the popular [Guake Terminal](https://github.com
 
 # How to use
 After the requirements are met, clone the repository to a safe location (or download as a ZIP):
-`git clone https://github.com/chand1012/winguake.git`
+`git clone https://github.com/chand1012/WinGuake.git`
 Double click Console.ahk and just press Ctrl+Alt+T. Something like this should show up:
 ![](https://i.imgur.com/LbEgJKY.png)
 To exit, just type `exit` into the console. AutoHotKey will run in the background for when you need to bring up the CMD again.
