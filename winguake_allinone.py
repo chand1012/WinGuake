@@ -1,6 +1,17 @@
 import os, sys
 import argparse
 import subprocess
+
+def chdir(drive, path):
+    if 'ENV' in path:
+        env_path = os.getenv(path[3:])
+    else:
+        env_path = path
+    if drive is '':
+        os.system('c:')
+    else:
+        os.system(drive)
+    os.chdir(env_path)
 #command line handler
 parser = argparse.ArgumentParser(description="Guake for Windows")
 parser.add_argument('-s', '--settings', help="Open settings", action='store_true')
