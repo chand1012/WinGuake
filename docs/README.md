@@ -32,3 +32,4 @@ To exit, just type `exit` into the console. AutoHotKey will run in the backgroun
 - Get settings working correctly
 - Finish Settings editor
 - Custom starting directories and color changing
+- Quake Style drop-down animation
