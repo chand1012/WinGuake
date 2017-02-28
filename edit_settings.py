@@ -12,15 +12,15 @@ def get_vars():
 
 def color_handler(color_val):
     if color_val is 'Green':
-        return '0a'
+        return 'color 0a'
     elif color_val is 'Blue':
-        return '01'
+        return 'color 01'
     elif color_val is 'Red':
-        return '04'
+        return 'color 04'
     elif color_val is 'White':
-        return '07'
+        return 'color 07'
     elif color_val is 'Black on White':
-        return 'F0'
+        return 'color F0'
 
 def ask_reset():
     result = messagebox.askquestion("Reset Settings", "Are You Sure?", icon='warning')
