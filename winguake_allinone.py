@@ -2,6 +2,7 @@ import os, sys
 import argparse
 import subprocess
 import win32api, win32gui
+import json
 
 def enumHandler(hwnd, lParam):
     if win32gui.IsWindowVisible(hwnd):
@@ -33,6 +34,14 @@ def write_to_log(path, path_to_log):
     pathlog = open('{}\\path.log'.format(path_to_log), 'a')
     pathlog.write('{}\n'.format(path))
     pathlog.close()
+
+def get_setting(thing):
+    json_file = open('settings.json')
+    json_data = json.loads(json_file.read())
+    if thing is '':
+        return json_data
+    else:
+        return json_data[thing]
 
 
 def chdir(drive, path):
@@ -78,9 +87,10 @@ else:
         if args.verbose:
             print("WinGuake Already running!")
 
+    print("Initializing WinGuake....")
     os.system('title WinGuake')
     window_resize()
-    os.system('color 0a')
+    os.system(get_setting('color'))
     startingpath = None
     if os.path.isfile('path.log'):
         pathlog = 'path.log'
@@ -93,6 +103,7 @@ else:
         current_dir = os.getcwd()
         write_to_log(current_dir, logpath)
         command = input("{}>".format(current_dir))
+        print('')
         if 'cd' in command[:2]:
             try:
                 os.chdir(command[3:])
