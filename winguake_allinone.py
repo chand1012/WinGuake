@@ -118,5 +118,7 @@ else:
             os.remove("{}\\path.log".format(logpath))
             os.system('exit')
             sys.exit()
+        elif 'ls' in command:
+            print(os.listdir())
         else:
             os.system(command)
