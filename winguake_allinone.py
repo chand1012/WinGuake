@@ -54,12 +54,11 @@ def get_setting(thing):
 def console_running():
     console_running = None
     cmd = 'wmic process get description'
-    proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-    for line in proc.stdout:
-        if 'console.exe' in str(line):
-            console_running = True
-        else:
-            console_running = False
+    proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)    
+    if 'console.exe' in str(proc.stdout):
+        console_running = True
+    else:
+        console_running = False
     return console_running
 
 def chdir(path):
