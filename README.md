@@ -13,9 +13,10 @@ WinGuake is a Windows version of the popular [Guake Terminal](https://github.com
 # Get Pre-compiled Version
 - Download from the [releases](https://github.com/chand1012/winguake/releases) tab.
 - Extract the zip to the directory of your choice
-- Run console.exe
+- Run `console.exe`
 - Press Ctrl+Alt+T to start up the console
 - When done, type `exit` to close the console
+- To run on startup, make a shortcut to `console.exe` and place it in `shell:startup`
 
 # Prerequisites
  To run from source, you need a working version of [Python](http://python.org) 3.x with Tkinter (Python 2.x is untested) installed and added to PATH, have [AutoHotKey](https://autohotkey.com/) installed, and the latest version of [PyWin32](https://sourceforge.net/projects/pywin32/).
