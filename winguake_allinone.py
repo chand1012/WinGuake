@@ -17,18 +17,22 @@ def window_resize():
     win32gui.EnumWindows(enumHandler, None)
 
 
-def last_line(logfile):
-    with open(logfile, 'rb') as fh:
-        first = next(fh)
-        offs = -100
-        while True:
-            fh.seek(offs, 2)
-            lines = fh.readlines()
-            if len(lines)>1:
-                last = lines[-1]
-                break
-            offs *= 2
-        return last
+def last_line(inputfile):
+    filesize = os.path.getsize(inputfile)
+    blocksize = 1024
+    dat_file = open(inputfile, 'rb')
+    headers = dat_file.readline().strip()
+    if filesize > blocksize :
+        maxseekpoint = (filesize // blocksize)
+        dat_file.seek(maxseekpoint*blocksize)
+    elif filesize :
+        maxseekpoint = blocksize % filesize
+        dat_file.seek(maxseekpoint)
+    lines =  dat_file.readlines()
+    if lines :
+        last_line = lines[-1].strip()
+    print("Last Dir: ", last_line)
+    return last_line.decode('utf-8')
 
 def write_to_log(path, path_to_log):
     pathlog = open('{}\\path.log'.format(path_to_log), 'a')
@@ -45,7 +49,7 @@ def get_setting(thing):
 
 
 def chdir(drive, path):
-    if 'ENV' in path:
+    if '%' in path:
         env_path = os.getenv(path[3:])
     else:
         env_path = path
@@ -58,7 +62,6 @@ def chdir(drive, path):
 parser = argparse.ArgumentParser(description="Guake for Windows")
 parser.add_argument('-s', '--settings', help="Open settings", action='store_true')
 parser.add_argument('-v', '--verbose', help='Verbose mode', action='store_true')
-parser.add_argument
 args = parser.parse_args()
 console_running = False
 logpath = '{}\\logs'.format(os.getcwd())
@@ -92,8 +95,10 @@ else:
     window_resize()
     os.system(get_setting('color'))
     startingpath = None
-    if os.path.isfile('path.log'):
-        pathlog = 'path.log'
+    if not os.path.isdir('logs'):
+        os.mkdir('logs')
+    if os.path.isfile('{}\\path.log'.format(logpath)):
+        pathlog = '{}\\path.log'.format(logpath)
         startingpath = last_line(pathlog)
     else:
         startingpath = os.getenv('USERPROFILE')
@@ -103,7 +108,6 @@ else:
         current_dir = os.getcwd()
         write_to_log(current_dir, logpath)
         command = input("{}>".format(current_dir))
-        print('')
         if 'cd' in command[:2]:
             try:
                 os.chdir(command[3:])
@@ -118,7 +122,11 @@ else:
             os.remove("{}\\path.log".format(logpath))
             os.system('exit')
             sys.exit()
+        elif command == 'minimize':
+            os.system('exit')
+            sys.exit()
         elif 'ls' in command:
             print(os.listdir())
         else:
             os.system(command)
+        print('')
