@@ -39,12 +39,16 @@ def write_to_log(path, path_to_log):
     pathlog.write('{}\n'.format(path))
     pathlog.close()
 
-def get_setting(thing):
-    try:
-        json_file = open('settings.json')
-        raw_data = json_file.read()
-    except:
-        print('JSON file not found!, resorting to defaults')
+def get_setting(thing, default=False):
+    raw_data = None
+    if not default:
+        try:
+            json_file = open('settings.json')
+            raw_data = json_file.read()
+        except:
+            print('JSON file not found!, resorting to defaults')
+            raw_data = '{"color": "color 0a", "exit": "exit", "minimize": "min"}'
+    else:
         raw_data = '{"color": "color 0a", "exit": "exit", "minimize": "min"}'
     json_data = json.loads(raw_data)
     if thing is '' or thing is None:
@@ -54,7 +58,7 @@ def get_setting(thing):
 def console_running():
     console_running = None
     cmd = 'wmic process get description'
-    proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)    
+    proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
     if 'console.exe' in str(proc.stdout):
         console_running = True
     else:
@@ -64,11 +68,11 @@ def console_running():
 def chdir(path):
     if '%' in path:
         env_var = path.upper().replace('%', '')
-        print(env_var)
+        #print(env_var)
         env_path = os.getenv(env_var)
     else:
         env_path = path
-    print(env_path)
+    #print(env_path)
     try:
         os.chdir(env_path)
     except:
@@ -101,9 +105,9 @@ else:
     print("Initializing WinGuake....")
     os.system('title WinGuake - Guake For Windows')
     window_resize()
-    os.system(get_setting('color'))
-    exit_command = get_setting('exit')
-    minimize_command = get_setting('minimize')
+    os.system(get_setting('color', args.default))
+    exit_command = get_setting('exit', args.default)
+    minimize_command = get_setting('minimize', args.default)
     startingpath = None
     if not os.path.isdir('logs'):
         os.mkdir('logs')
