@@ -2,3 +2,4 @@ combine start_winguake.bat and guake.py and compile
 get settings working correctly
 find way to easily save last directory
 add Quake-style drop down animation
+make the icon have a transparent background
