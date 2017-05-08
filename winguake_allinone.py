@@ -81,7 +81,7 @@ def chdir(path):
 parser = argparse.ArgumentParser(description="Guake for Windows")
 parser.add_argument('-s', '--settings', help="Open settings", action='store_true')
 parser.add_argument('-v', '--verbose', help='Verbose mode', action='store_true')
-parser.add_argument('-d', '--defaults', help="Run with default settings", action='store_true')
+parser.add_argument('-d', '--default', help="Run with default settings", action='store_true')
 args = parser.parse_args()
 logpath = '{}\\logs'.format(os.getcwd())
 if args.verbose:
