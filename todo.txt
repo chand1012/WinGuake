@@ -3,3 +3,4 @@ get settings working correctly
 find way to easily save last directory
 add Quake-style drop down animation
 make the icon have a transparent background
+get tab function working
