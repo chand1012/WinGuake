@@ -29,7 +29,7 @@ Double click Console.ahk and just press Ctrl+Alt+T. Something like this should s
 To exit, just type `exit` into the console. AutoHotKey will run in the background for when you need to bring up the CMD again.
 
 # Planned Features
-- have the console save the directory that you were last in
+- get tab key working
 - Get settings working correctly
 - Finish Settings editor
 - Custom starting directories and color changing
