@@ -149,10 +149,12 @@ else:
     os.chdir(startingpath)
     os.system('cls')
     while True:
+        dir_changed = False
         current_dir = os.getcwd()
         write_to_log(current_dir, logpath)
         command = input("{}>".format(current_dir))
         if 'cd' in command[:2]:
+            dir_changed = True
             chdir(command[3:])
         elif len(command) is 2 and ':' in command:
             try:
@@ -165,6 +167,8 @@ else:
             sys.exit()
         elif command == minimize_command:
             os.system('exit')
+            if not dir_changed:
+                os.remove("{}\\path.log".format(logpath))
             sys.exit()
         elif command == 'ls':
             print(os.listdir())
