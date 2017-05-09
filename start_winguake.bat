@@ -1,5 +1,4 @@
 @echo off
-title WinGuake - Loading
-cd bin
-winguake.exe
+title WinGuake
+python winguake_allinone.py
 exit
