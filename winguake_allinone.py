@@ -3,6 +3,22 @@ import argparse
 import subprocess
 import win32api, win32gui
 import json
+import threading
+from msvcrt import getch
+'''
+class tabThread(threading.Thread):
+    def __init__(self, threadID, name, counter):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.counter = counter
+    def run(self):
+        print("Tab thread starting.")
+        count = 0
+        keypress = detect_key()
+        if keypress == '\t':
+            #finish the tab thread
+'''
 
 def enumHandler(hwnd, lParam):
     if win32gui.IsWindowVisible(hwnd):
@@ -16,6 +32,20 @@ def enumHandler(hwnd, lParam):
 def window_resize():
     win32gui.EnumWindows(enumHandler, None)
 
+def detect_key():
+    key = getch()
+    key = key.decode('utf-8')
+    return key
+
+def tab_function(letters='', filenumber=0):
+    numletters = len(letters)
+    filename = None
+    truefiles = []
+    filelist = os.listdir()
+    for dirfile in filelist:
+        if letters in dirfile[:numletters]:
+            truefiles += [dirfile]
+    return truefiles[filenumber]
 
 def last_line(inputfile):
     filesize = os.path.getsize(inputfile)
