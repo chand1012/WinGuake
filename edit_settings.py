@@ -3,13 +3,6 @@ from tkinter import messagebox
 import os, sys
 import json
 
-def get_vars():
-    global arguments
-    arguments = []
-    arguments += [color.get(), dir_var.get(), int(width_var.get()), int(height_var.get())]
-    print(arguments)
-    return arguments
-
 def color_handler(color_val):
     if color_val is 'Green':
         return 'color 0a'
@@ -32,7 +25,8 @@ def default_settings():
     #rewrite in JSON
     data = {}
     data['color'] = '0a'
-    data['directory'] = ''
+    data['exit'] = 'exit'
+    data['minimize'] = 'min'
     data['width'] = ''
     data['height'] = ''
     json_data = json.dumps(data)
@@ -46,7 +40,8 @@ def apply_settings(settings_list):
     #rewrite in JSON
     data = {}
     data['color'] = settings_list[0]
-    data['directory'] = settings_list[1]
+    data['exit'] = settings_list[1]
+    data['minimize'] = settings_list[4]
     data['width'] = settings_list[2]
     data['height'] = settings_list[3]
     json_data = json.dumps(data)
@@ -57,7 +52,7 @@ def apply_settings(settings_list):
     sys.exit()
 
 #print(os.path.dirname(os.path.abspath(__file__)))
-icon = r'{}/guake_icon.ico'.format(os.path.dirname(os.path.abspath(__file__)))
+icon = r'{}/winguake_icon.ico'.format(os.path.dirname(os.path.abspath(__file__)))
 
 root = Tk()
 
@@ -68,11 +63,17 @@ color.set('Green')
 color_box = OptionMenu(root, color, "Green", "Blue", "Red", "White", "Black on White")
 color_box.grid(row=0, column=1)
 
-dir_text = Label(root, text="WinGuake starting directory")
-dir_text.grid(row=1)
-dir_var = StringVar()
-dir_box = Entry(root, bd=3, textvariable=dir_var)
-dir_box.grid(row=1, column=1)
+exit_text = Label(root, text="WinGuake exit command")
+exit_text.grid(row=1)
+exit_var = StringVar()
+exit_box = Entry(root, bd=3, textvariable=exit_var)
+exit_box.grid(row=1, column=1)
+
+min_text = Label(root, text="WinGuake minimize command")
+min_text.grid(row=1)
+min_var = StringVar()
+min_box = Entry(root, bd=3, textvariable=min_var)
+min_box.grid(row=1, column=1)
 
 width_text = Label(root, text="WinGuake starting width")
 width_text.grid(row=2)
@@ -86,7 +87,7 @@ height_var = StringVar()
 height_box = Entry(root, bd=3, textvariable=height_var)
 height_box.grid(row=3, column=1)
 
-apply_button = Button(root, text="Apply", command= lambda: apply_settings([color_handler(color.get()), dir_var.get(), width_var.get(), height_var.get()])).grid(row=5) #1: color, 2: directory, 3: width, 4: height
+apply_button = Button(root, text="Apply", command= lambda: apply_settings([color_handler(color.get()), exit_var.get(), width_var.get(), height_var.get(), min_var.get()])).grid(row=5) #1: color, 2: exit, 3: width, 4: height
 
 reset_buttom = Button(root, text="Reset Settings", command=ask_reset).grid(row=5, column=1)
 root.title("WinGuake Settings")
