@@ -1,4 +1,4 @@
-combine start_winguake.bat and guake.py and compile
+fix Ctrl-C issue
 contact guake creator on winguake
 get settings working correctly
 find way to easily save last directory
