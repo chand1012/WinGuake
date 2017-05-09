@@ -1,5 +1,5 @@
-title WinGuake
-python window_resize.py
-c:
-cd %USERPROFILE%
-cls
+@echo off
+title WinGuake - Loading
+cd bin
+winguake.exe
+exit
