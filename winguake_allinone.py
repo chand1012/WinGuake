@@ -146,7 +146,11 @@ else:
         startingpath = last_line(pathlog)
     else:
         startingpath = os.getenv('USERPROFILE')
-    os.chdir(startingpath)
+    try:
+        os.chdir(startingpath)
+    except:
+        print("CANNOT CHANGE PATH, REVERTING TO DEFAULT")
+        os.chdir(os.getenv('USERPROFILE'))
     os.system('cls')
     while True:
         dir_changed = False
