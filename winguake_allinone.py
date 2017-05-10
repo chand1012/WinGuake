@@ -61,7 +61,7 @@ def last_line(inputfile):
     lines =  dat_file.readlines()
     if lines :
         last_line = lines[-1].strip()
-    print("Last Dir: ", last_line)
+    print("Last Dir: ", last_line.decode('utf-8'))
     return last_line.decode('utf-8')
 
 def write_to_log(path, path_to_log):
@@ -85,15 +85,26 @@ def get_setting(thing, default=False):
         return json_data
     else:
         return json_data[thing]
+
 def console_running():
     console_running = None
     cmd = 'wmic process get description'
     proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-    if 'console.exe' in str(proc.stdout) or 'AutoHotkey.exe' in str(proc.stdout):
+    if 'console.exe' in str(proc.stdout):
         console_running = True
     else:
         console_running = False
     return console_running
+
+def ahk_running():
+    ahk_running = None
+    cmd = 'wmic process get description'
+    proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+    if 'AutoHotkey.exe' in str(proc.stdout):
+        ahk_running = True
+    else:
+        ahk_running = False
+    return ahk_running
 
 def chdir(path):
     if '%' in path:
@@ -130,10 +141,17 @@ else:
         run_console = os.system('console.exe')
         if int(run_console) != 0:
             if args.verbose:
-                print("WinGuake precompiled script not found, trying to run script...")
-            run_console_b = os.system('start Console.ahk')
-            if int(run_console_b) != 0:
-                print("No console script found, skipping....")
+                print("WinGuake precompiled script not found, seeing if AutoHotkey is running...")
+            if not ahk_running():
+                if args.verbose:
+                    print('AutoHotkey is not running, trying to run...')
+                run_console_b  = os.system('start Console.ahk')
+                if int(run_console_b) != 0:
+                    if args.verbose:
+                        print("No console script found, skipping....")
+            else:
+                if args.verbose:
+                    print('AutoHotkey is already running!')
     else:
         if args.verbose:
             print("WinGuake Already running!")
@@ -161,8 +179,8 @@ else:
         os.chdir(os.getenv('USERPROFILE'))
     if not args.verbose:
         os.system('cls')
+    dir_changed = False
     while True:
-        dir_changed = False
         current_dir = os.getcwd()
         write_to_log(current_dir, logpath)
         command = input("\n{}>".format(current_dir))
