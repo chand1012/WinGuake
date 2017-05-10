@@ -89,7 +89,7 @@ def console_running():
     console_running = None
     cmd = 'wmic process get description'
     proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-    if 'console.exe' in str(proc.stdout):
+    if 'console.exe' in str(proc.stdout) or 'AutoHotkey.exe' in str(proc.stdout):
         console_running = True
     else:
         console_running = False
@@ -127,7 +127,13 @@ else:
     if not console_running():
         if args.verbose:
             print("WinGuake not started, starting program...")
-        os.system('console.exe')
+        run_console = os.system('console.exe')
+        if int(run_console) != 0:
+            if args.verbose:
+                print("WinGuake precompiled script not found, trying to run script...")
+            run_console_b = os.system('start Console.ahk')
+            if int(run_console_b) != 0:
+                print("No console script found, skipping....")
     else:
         if args.verbose:
             print("WinGuake Already running!")
@@ -140,6 +146,8 @@ else:
     minimize_command = get_setting('minimize', args.default)
     startingpath = None
     if not os.path.isdir('logs'):
+        if not args.verbose:
+            print("Logs not found, making new dir...")
         os.mkdir('logs')
     if os.path.isfile('{}\\path.log'.format(logpath)):
         pathlog = '{}\\path.log'.format(logpath)
@@ -151,12 +159,13 @@ else:
     except:
         print("CANNOT CHANGE PATH, REVERTING TO DEFAULT")
         os.chdir(os.getenv('USERPROFILE'))
-    os.system('cls')
+    if not args.verbose:
+        os.system('cls')
     while True:
         dir_changed = False
         current_dir = os.getcwd()
         write_to_log(current_dir, logpath)
-        command = input("{}>".format(current_dir))
+        command = input("\n{}>".format(current_dir))
         if 'cd' in command[:2]:
             dir_changed = True
             chdir(command[3:])
@@ -170,9 +179,9 @@ else:
             os.system('exit')
             sys.exit()
         elif command == minimize_command:
-            os.system('exit')
             if not dir_changed:
                 os.remove("{}\\path.log".format(logpath))
+            os.system('exit')
             sys.exit()
         elif command == 'ls':
             print(os.listdir())
