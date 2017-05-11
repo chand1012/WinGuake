@@ -15,9 +15,10 @@ class tabThread(threading.Thread):
     def run(self):
         print("Tab thread starting.")
         count = 0
-        keypress = detect_key()
-        if keypress == '\t':
-            #finish the tab thread
+        while True:
+            keypress = detect_key(False)
+            if keypress == b'\t':
+                return True
 '''
 
 def enumHandler(hwnd, lParam):
@@ -32,9 +33,12 @@ def enumHandler(hwnd, lParam):
 def window_resize():
     win32gui.EnumWindows(enumHandler, None)
 
-def detect_key():
+def detect_key(decode_type='utf-8'):
     key = getch()
-    key = key.decode('utf-8')
+    if decode_type == False:
+        key = key
+    else:
+        key = key.decode(decode_type)
     return key
 
 def tab_function(letters='', filenumber=0):
