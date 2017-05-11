@@ -39,6 +39,7 @@ def default_settings():
 def apply_settings(settings_list):
     #rewrite in JSON
     data = {}
+    print(settings_list)
     data['color'] = settings_list[0]
     data['exit'] = settings_list[1]
     data['minimize'] = settings_list[4]
@@ -70,22 +71,22 @@ exit_box = Entry(root, bd=3, textvariable=exit_var)
 exit_box.grid(row=1, column=1)
 
 min_text = Label(root, text="WinGuake minimize command")
-min_text.grid(row=1)
+min_text.grid(row=2)
 min_var = StringVar()
 min_box = Entry(root, bd=3, textvariable=min_var)
-min_box.grid(row=1, column=1)
+min_box.grid(row=2, column=1)
 
 width_text = Label(root, text="WinGuake starting width")
-width_text.grid(row=2)
+width_text.grid(row=3)
 width_var = StringVar()
 width_box = Entry(root, bd=3, textvariable=width_var)
-width_box.grid(row=2, column=1)
+width_box.grid(row=3, column=1)
 
 height_text = Label(root, text="WinGuake starting height")
-height_text.grid(row=3)
+height_text.grid(row=4)
 height_var = StringVar()
 height_box = Entry(root, bd=3, textvariable=height_var)
-height_box.grid(row=3, column=1)
+height_box.grid(row=4, column=1)
 
 apply_button = Button(root, text="Apply", command= lambda: apply_settings([color_handler(color.get()), exit_var.get(), width_var.get(), height_var.get(), min_var.get()])).grid(row=5) #1: color, 2: exit, 3: width, 4: height
 
