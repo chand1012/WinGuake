@@ -164,28 +164,31 @@ else:
         os.system('cls')
     dir_changed = False
     while True:
-        current_dir = os.getcwd()
-        write_to_log(current_dir, logpath)
-        command = input("\n{}>".format(current_dir))
-        if 'cd' in command[:2]:
-            dir_changed = True
-            chdir(command[3:])
-        elif len(command) is 2 and ':' in command:
-            try:
-                os.chdir("{}/".format(command))
-            except:
-                print("Drive not found!")
-        elif command == exit_command:
-            os.remove("{}\\path.log".format(logpath))
-            os.system('exit')
-            sys.exit()
-        elif command == minimize_command:
-            if not dir_changed:
+        try:
+            current_dir = os.getcwd()
+            write_to_log(current_dir, logpath)
+            command = input("\n{}>".format(current_dir))
+            if 'cd' in command[:2]:
+                dir_changed = True
+                chdir(command[3:])
+            elif len(command) is 2 and ':' in command:
+                try:
+                    os.chdir("{}/".format(command))
+                except:
+                    print("Drive not found!")
+            elif command == exit_command:
                 os.remove("{}\\path.log".format(logpath))
-            os.system('exit')
-            sys.exit()
-        elif command == 'ls':
-            print(os.listdir())
-        else:
-            os.system(command)
-        print('')
+                os.system('exit')
+                sys.exit()
+            elif command == minimize_command:
+                if not dir_changed:
+                    os.remove("{}\\path.log".format(logpath))
+                os.system('exit')
+                sys.exit()
+            elif command == 'ls':
+                print(os.listdir())
+            else:
+                os.system(command)
+            print('')
+        except:
+            pass
