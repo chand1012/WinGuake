@@ -69,7 +69,7 @@ def write_to_log(path, path_to_log):
     pathlog.write('{}\n'.format(path))
     pathlog.close()
 
-def get_setting(thing, default=False):
+def get_setting(thing=None, default=False):
     raw_data = None
     if not default:
         try:
@@ -142,6 +142,7 @@ else:
     print("Initializing WinGuake....")
     os.system('title WinGuake - Guake For Windows')
     window_resize()
+    print("Starting with settings: {}".format(get_setting()))
     os.system(get_setting('color', args.default))
     exit_command = get_setting('exit', args.default)
     minimize_command = get_setting('minimize', args.default)
@@ -163,6 +164,7 @@ else:
     if not args.verbose:
         os.system('cls')
     dir_changed = False
+    print("WinGuake Ready!")
     while True:
         current_dir = os.getcwd()
         write_to_log(current_dir, logpath)
