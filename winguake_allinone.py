@@ -165,10 +165,10 @@ else:
     except:
         print("CANNOT CHANGE PATH, REVERTING TO DEFAULT")
         os.chdir(os.getenv('USERPROFILE'))
+    print("WinGuake Ready!")
     if not args.verbose:
         os.system('cls')
     dir_changed = False
-    print("WinGuake Ready!")
     while True:
         current_dir = os.getcwd()
         write_to_log(current_dir, logpath)
