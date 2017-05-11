@@ -1,6 +1,6 @@
 import os, sys
 import argparse
-import subprocess
+import psutil
 import win32api, win32gui
 import json
 import threading
@@ -86,25 +86,8 @@ def get_setting(thing, default=False):
     else:
         return json_data[thing]
 
-def console_running():
-    console_running = None
-    cmd = 'wmic process get description'
-    proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-    if 'console.exe' in str(proc.stdout):
-        console_running = True
-    else:
-        console_running = False
-    return console_running
-
-def ahk_running():
-    ahk_running = None
-    cmd = 'wmic process get description'
-    proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-    if 'AutoHotkey.exe' in str(proc.stdout):
-        ahk_running = True
-    else:
-        ahk_running = False
-    return ahk_running
+def is_running(thing):
+    return thing in (p.name() for p in psutil.process_iter())
 
 def chdir(path):
     if '%' in path:
@@ -135,14 +118,14 @@ if args.settings:
     #change these around when compiling
     #os.system('guake_settings.exe')
 else:
-    if not console_running():
+    if not is_running('console.exe'):
         if args.verbose:
             print("WinGuake not started, starting program...")
         run_console = os.system('console.exe')
         if int(run_console) != 0:
             if args.verbose:
                 print("WinGuake precompiled script not found, seeing if AutoHotkey is running...")
-            if not ahk_running():
+            if not is_running('AutoHotkey.exe'):
                 if args.verbose:
                     print('AutoHotkey is not running, trying to run...')
                 run_console_b  = os.system('start Console.ahk')
