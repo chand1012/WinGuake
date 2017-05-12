@@ -4,6 +4,7 @@ import psutil
 import win32api, win32gui
 import json
 import threading
+import keyboard
 from msvcrt import getch
 '''
 class tabThread(threading.Thread):
