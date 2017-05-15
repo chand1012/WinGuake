@@ -1,4 +1,4 @@
-fix Ctrl-C issue
+migrate to the ontop.py way of running winguake (cmd on top of a py script)
 contact guake creator on winguake
 get settings working correctly
 find way to easily save last directory
