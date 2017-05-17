@@ -1,7 +1,8 @@
 import os, sys
 import argparse
 import psutil
-import win32api, win32gui
+import win32gui
+from win32api import GetSystemMetrics
 import json
 import threading
 import keyboard
@@ -20,19 +21,6 @@ class tabThread(threading.Thread):
             keypress = detect_key(False)
             if keypress == b'\t':
                 return True
-'''
-
-def enumHandler(hwnd, lParam):
-    if win32gui.IsWindowVisible(hwnd):
-        if 'WinGuake - Guake For Windows' in win32gui.GetWindowText(hwnd):
-            m_width = win32api.GetSystemMetrics(0)
-            m_length = win32api.GetSystemMetrics(1)
-            w_width = int(m_width)
-            w_length = int(m_length/2)
-            win32gui.MoveWindow(hwnd, 0, 0, w_width, w_length, True)
-
-def window_resize():
-    win32gui.EnumWindows(enumHandler, None)
 
 def detect_key(decode_type='utf-8'):
     key = getch()
@@ -51,6 +39,20 @@ def tab_function(letters='', filenumber=0):
         if letters in dirfile[:numletters]:
             truefiles += [dirfile]
     return truefiles[filenumber]
+
+'''
+
+def enumHandler(hwnd, lParam):
+    if win32gui.IsWindowVisible(hwnd):
+        if 'WinGuake - Guake For Windows' in win32gui.GetWindowText(hwnd):
+            m_width = GetSystemMetrics(0)
+            m_length = GetSystemMetrics(1)
+            w_width = int(m_width)
+            w_length = int(m_length/2)
+            win32gui.MoveWindow(hwnd, 0, 0, w_width, w_length, True)
+
+def window_resize():
+    win32gui.EnumWindows(enumHandler, None)
 
 def last_line(inputfile):
     filesize = os.path.getsize(inputfile)
@@ -79,15 +81,27 @@ def get_setting(thing=None, default=False):
     if not default:
         try:
             json_file = open('settings.json')
-            raw_data = json_file.read()
         except:
             print('JSON file not found!, resorting to defaults')
             raw_data = '{"color": "color 0a", "exit": "exit", "minimize": "min"}'
+            raw_data = json_file.read()
     else:
         raw_data = '{"color": "color 0a", "exit": "exit", "minimize": "min"}'
     json_data = json.loads(raw_data)
     if thing is '' or thing is None:
         return json_data
+    elif thing is 'color':
+        color = json_data['color']
+        if 'Green' in color:
+            return 'color 0a'
+        elif 'Blue' in color:
+            return 'color 01'
+        elif 'Red' in color:
+            return 'color 04'
+        elif 'White' in color:
+            return 'color 07'
+        elif 'Black on White' in color:
+            return 'color F0'
     else:
         return json_data[thing]
 

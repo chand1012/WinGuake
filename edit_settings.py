@@ -88,7 +88,7 @@ height_var = StringVar()
 height_box = Entry(root, bd=3, textvariable=height_var)
 height_box.grid(row=4, column=1)
 
-apply_button = Button(root, text="Apply", command= lambda: apply_settings([color_handler(color.get()), exit_var.get(), width_var.get(), height_var.get(), min_var.get()])).grid(row=5) #1: color, 2: exit, 3: width, 4: height
+apply_button = Button(root, text="Apply", command= lambda: apply_settings([color.get(), exit_var.get(), width_var.get(), height_var.get(), min_var.get()])).grid(row=5) #1: color, 2: exit, 3: width, 4: height
 
 reset_buttom = Button(root, text="Reset Settings", command=ask_reset).grid(row=5, column=1)
 root.title("WinGuake Settings")
