@@ -161,7 +161,7 @@ else:
     print("Initializing WinGuake....")
     os.system('title WinGuake - Guake For Windows')
     window_resize()
-    print("Starting with settings: {}".format(get_setting()))
+    #print("Starting with settings: {}".format(get_setting()))
     os.system(get_setting('color', args.default))
     exit_command = get_setting('exit', args.default)
     minimize_command = get_setting('minimize', args.default)
