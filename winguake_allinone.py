@@ -80,11 +80,11 @@ def get_setting(thing=None, default=False):
     raw_data = None
     if not default:
         try:
-            json_file = open('settings.json')
+            json_file = open('settings.json','r')
+            raw_data = json_file.read()
         except:
             print('JSON file not found!, resorting to defaults')
             raw_data = '{"color": "color 0a", "exit": "exit", "minimize": "min"}'
-            raw_data = json_file.read()
     else:
         raw_data = '{"color": "color 0a", "exit": "exit", "minimize": "min"}'
     json_data = json.loads(raw_data)
@@ -92,16 +92,7 @@ def get_setting(thing=None, default=False):
         return json_data
     elif thing is 'color':
         color = json_data['color']
-        if 'Green' in color:
-            return 'color 0a'
-        elif 'Blue' in color:
-            return 'color 01'
-        elif 'Red' in color:
-            return 'color 04'
-        elif 'White' in color:
-            return 'color 07'
-        elif 'Black on White' in color:
-            return 'color F0'
+        return "color {}".format(color)
     else:
         return json_data[thing]
 
@@ -135,7 +126,7 @@ if args.settings:
         print("Running settings...")
     os.system('python edit_settings.py')
     #change these around when compiling
-    #os.system('guake_settings.exe')
+    #os.system('winguake_settings.exe')
 else:
     if not is_running('console.exe'):
         if args.verbose:
@@ -190,7 +181,11 @@ else:
         command = input("\n{}>".format(current_dir))
         if 'cd' in command[:2]:
             dir_changed = True
-            chdir(command[3:])
+            chngepath = command[3:]
+            if chngepath is '~':
+                chdir(os.getenv('USERPROFILE'))
+            else:
+                chdir(chngepath)
         elif len(command) is 2 and ':' in command:
             try:
                 os.chdir("{}/".format(command))
