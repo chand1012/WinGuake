@@ -28,7 +28,16 @@ Double click Console.ahk and just press Ctrl+Alt+T. Something like this should s
 ![](https://i.imgur.com/LbEgJKY.png)
 To exit, just type `exit` into the console. AutoHotKey will run in the background for when you need to bring up the CMD again.
 
+# Compile it yourself
+- After the requirements are met, clone the repository to a safe location (or download as a ZIP):
+`git clone https://github.com/chand1012/WinGuake.git`
+- have the AutoHotkey compiler `Ahk2Exe.exe` added to PATH
+- run `compile.bat`
+- copy the output `winguake.exe` to the `console` folder, located within `dist`
+- double click to run
+
 # Planned Features
+- make it so you don't have to type `exit` twice
 - Have tab key work
 - Get settings working correctly
 - Finish Settings editor

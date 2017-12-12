@@ -1,1 +1,5 @@
 start.bat
+build/
+__pycache__
+dist/
+*.spec
