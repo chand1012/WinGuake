@@ -2,6 +2,7 @@ import win32gui
 from win32api import GetSystemMetrics
 import psutil
 import os
+
 def enumHandler(hwnd, lParam):
     if win32gui.IsWindowVisible(hwnd):
         if 'WinGuake - Guake For Windows' in win32gui.GetWindowText(hwnd):
@@ -29,3 +30,29 @@ def chdir(path):
         os.chdir(env_path)
     except:
         print("Path not found!")
+
+def get_dir(path_to_log="./path.log"):
+    last = last_line(path_to_log)
+    return last
+
+def write_to_log(path, path_to_log="./"):
+    pathlog = open('{}\\path.log'.format(path_to_log), 'a')
+    pathlog.write('{}\n'.format(path))
+    pathlog.close()
+
+def last_line(inputfile):
+    filesize = os.path.getsize(inputfile)
+    blocksize = 1024
+    dat_file = open(inputfile, 'rb')
+    headers = dat_file.readline().strip()
+    if filesize > blocksize :
+        maxseekpoint = (filesize // blocksize)
+        dat_file.seek(maxseekpoint*blocksize)
+    elif filesize :
+        maxseekpoint = blocksize % filesize
+        dat_file.seek(maxseekpoint)
+    lines =  dat_file.readlines()
+    if lines :
+        last_line = lines[-1].strip()
+    print("Last Dir: ", last_line.decode('utf-8'))
+    return last_line.decode('utf-8')

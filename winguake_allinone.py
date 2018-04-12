@@ -71,7 +71,7 @@ def last_line(inputfile):
     print("Last Dir: ", last_line.decode('utf-8'))
     return last_line.decode('utf-8')
 
-def write_to_log(path, path_to_log):
+def write_to_log(path, path_to_log="./"):
     pathlog = open('{}\\path.log'.format(path_to_log), 'a')
     pathlog.write('{}\n'.format(path))
     pathlog.close()

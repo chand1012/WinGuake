@@ -2,12 +2,14 @@ from windowLib import *
 import sys, os
 import argparse
 
+temp_dir = os.getenv("TEMP")
+dir = "."
+
 parser = argparse.ArgumentParser(description="Guake for Windows")
 #parser.add_argument('-s', '--settings', help="Open settings", action='store_true')
 parser.add_argument('-v', '--verbose', help='Verbose mode', action='store_true')
 #parser.add_argument('-d', '--default', help="Run with default settings", action='store_true')
 args = parser.parse_args()
-logpath = '{}\\logs'.format(os.getcwd())
 if args.verbose:
     print("Running WinGuake in Verbose mode.")
 
@@ -42,5 +44,10 @@ else:
 
 if not args.verbose:
     os.system("cls")
-chdir("%USERPROFILE%")
+try:
+    dir = get_dir("{}\\path.log".format(temp_dir))
+except:
+    dir = os.getenv("USERPROFILE")
+
+chdir(dir)
 window_resize()
