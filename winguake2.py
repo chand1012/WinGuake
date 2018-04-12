@@ -46,6 +46,7 @@ if not args.verbose:
     os.system("cls")
 try:
     dir = get_dir("{}\\path.log".format(temp_dir))
+    print dir
 except:
     dir = os.getenv("USERPROFILE")
 

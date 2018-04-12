@@ -41,18 +41,10 @@ def write_to_log(path, path_to_log="./"):
     pathlog.close()
 
 def last_line(inputfile):
-    filesize = os.path.getsize(inputfile)
-    blocksize = 1024
-    dat_file = open(inputfile, 'rb')
-    headers = dat_file.readline().strip()
-    if filesize > blocksize :
-        maxseekpoint = (filesize // blocksize)
-        dat_file.seek(maxseekpoint*blocksize)
-    elif filesize :
-        maxseekpoint = blocksize % filesize
-        dat_file.seek(maxseekpoint)
-    lines =  dat_file.readlines()
-    if lines :
-        last_line = lines[-1].strip()
-    print("Last Dir: ", last_line.decode('utf-8'))
-    return last_line.decode('utf-8')
+    with open(inputfile, "rb") as f:
+        first = f.readline()
+        f.seek(-2, os.SEEK_END)
+        while f.read(1) != b"\n":
+            f.seek(-2, os.SEEK_CUR)
+        last = f.readline()
+        return last
