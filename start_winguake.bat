@@ -1,4 +1,4 @@
 @echo off
 title WinGuake - Guake For Windows
 echo WinGuake is starting....
-python winguake2.pyw
+python winguake2.py
