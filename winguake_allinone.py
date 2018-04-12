@@ -112,6 +112,7 @@ def chdir(path):
     except:
         print("Path not found!")
 #command line handler
+'''
 parser = argparse.ArgumentParser(description="Guake for Windows")
 parser.add_argument('-s', '--settings', help="Open settings", action='store_true')
 parser.add_argument('-v', '--verbose', help='Verbose mode', action='store_true')
@@ -208,3 +209,4 @@ else:
             except:
                 pass
         print('')
+'''
