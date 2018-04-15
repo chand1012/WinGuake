@@ -26,16 +26,17 @@ def chdir(path):
     else:
         env_path = path
     #print(env_path)
+
     try:
         os.chdir(env_path)
-    except:
-        print("Path not found!")
+    except Exception as e:
+        print(e)
 
 def get_dir(path_to_log="./path.log"):
     last = last_line(path_to_log)
     return last
 
-def write_to_log(path, path_to_log="./"):
+def write_to_log(path, path_to_log=os.path.dirname(os.path.realpath(__file__))):
     pathlog = open('{}\\path.log'.format(path_to_log), 'a')
     pathlog.write('{}\n'.format(path))
     pathlog.close()

@@ -2,7 +2,7 @@ from windowLib import *
 import sys, os
 import argparse
 
-temp_dir = os.getenv("TEMP")
+temp_dir = os.path.dirname(os.path.realpath(__file__))
 dir = "."
 
 parser = argparse.ArgumentParser(description="Guake for Windows")
@@ -44,11 +44,13 @@ else:
 
 if not args.verbose:
     os.system("cls")
-try:
-    dir = get_dir("{}\\path.log".format(temp_dir))
-    print dir
-except:
-    dir = os.getenv("USERPROFILE")
+dir = "."
+with open("path.log") as f:
+    first = f.readline()
+    f.seek(-2, os.SEEK_END)
+    while f.read(1) != b"\n":
+        f.seek(-2, os.SEEK_CUR)
+    dir = f.readline()
 
 chdir(dir)
 window_resize()
