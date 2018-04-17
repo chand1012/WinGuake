@@ -3,7 +3,7 @@ import sys, os
 import argparse
 
 temp_dir = os.path.dirname(os.path.realpath(__file__))
-dir = "."
+#dir = "."
 
 parser = argparse.ArgumentParser(description="Guake for Windows")
 #parser.add_argument('-s', '--settings', help="Open settings", action='store_true')
@@ -44,13 +44,8 @@ else:
 
 if not args.verbose:
     os.system("cls")
-dir = "."
-with open("path.log") as f:
-    first = f.readline()
-    f.seek(-2, os.SEEK_END)
-    while f.read(1) != b"\n":
-        f.seek(-2, os.SEEK_CUR)
-    dir = f.readline()
+#dir = get_dir() get this working
+dir = os.getenv("USERPROFILE")
 
-chdir(dir)
+os.chdir(dir)
 window_resize()
