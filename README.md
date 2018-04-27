@@ -38,8 +38,8 @@ To exit, just type `exit` into the console. AutoHotKey will run in the backgroun
 
 # Planned Features
 - ~~make it so you don't have to type `exit` twice~~ the current working version allows you to press `Ctrl+Alt+T` a second time to close, but another window does pop up for a split second
-- Have tab key work
+- ~~Have tab key work~~ Tab key works
 - Get settings working correctly
 - Finish Settings editor
 - Custom starting directories and color changing
-- Quake Style drop-down animation
+- Quake Style drop-down animation (last on the list)
