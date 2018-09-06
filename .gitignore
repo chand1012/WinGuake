@@ -5,3 +5,4 @@ dist/
 *.spec
 *.pyc
 *.log
+logs/
