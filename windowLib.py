@@ -61,7 +61,7 @@ def write_to_log(path, path_to_log):
 
 def last_line(inputfile):
     with open(inputfile, "rb") as f:
-        first = f.readline()
+        #first = f.readline()
         f.seek(-2, os.SEEK_END)
         while f.read(1) != b"\n":
             f.seek(-2, os.SEEK_CUR)

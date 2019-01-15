@@ -45,7 +45,7 @@ else:
 if not args.verbose:
     os.system("cls")
 #dir = get_dir() get this working
-dir = os.getenv("USERPROFILE")
+folder = os.getenv("USERPROFILE")
 
-os.chdir(dir)
+os.chdir(folder)
 window_resize()
