@@ -51,7 +51,7 @@ def get_dir(path_to_log="./path.log"):
                 break
         return lines[line]
     except Exception as e:
-        print e
+        print(e)
         return os.getenv("USERPROFILE")
 
 def write_to_log(path, path_to_log):
