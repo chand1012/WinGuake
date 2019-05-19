@@ -2,7 +2,7 @@ toggle:=0
 
 <^<!t::
 if (toggle=0){
-  Run, cmd /k start_winguake.bat
+  Run, start Cmder
   toggle:=!toggle
 } else {
   Run, kill.vbs

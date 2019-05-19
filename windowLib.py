@@ -5,7 +5,7 @@ import os
 
 def enumHandler(hwnd, lParam):
     if win32gui.IsWindowVisible(hwnd):
-        if 'WinGuake - Guake For Windows' in win32gui.GetWindowText(hwnd):
+        if 'WinGuake - Guake For Windows' in win32gui.GetWindowText(hwnd) or "Cmder" in win32gui.GetWindowText(hwnd): # porting to Cmder
             m_width = GetSystemMetrics(0)
             m_length = GetSystemMetrics(1)
             w_width = int(m_width)
