@@ -3,6 +3,9 @@ A Windows-oriented version of the popular Guake Terminal for Linux.
 
 Check out the original Linux version here: https://github.com/Guake/guake/
 
+# Info on the state of the project
+Currently, I am rewriting the project for the most part to use a Windows terminal emulator called [Cmder](https://cmder.net/), which offers better Git intergration along with a more unix-like experience while still maintaining all the functionality of the original windows command prompt. More information will be available upon completion of the port.
+
 # What is it?
 Remember the days when playing Quake (or even as recent as CS:GO) where you pressed a key and the console came up? Wouldn't it be very convenient if Windows did this?
 **Enter WinGuake!**
@@ -17,7 +20,7 @@ WinGuake is a Windows version of the popular [Guake Terminal](https://github.com
 - To run on startup, make a shortcut to `console.exe` and place it in `shell:startup`
 
 # Prerequisites
- To run from source, you need a working version of [Python](http://python.org) 2.x with Tkinter (Python 3.x is untested and needs to be converted with [future](http://python-future.org/)) installed and added to PATH, have [psutil](https://github.com/giampaolo/psutil) installed via pip, have [AutoHotKey](https://autohotkey.com/) installed, and the latest version of [PyWin32](https://sourceforge.net/projects/pywin32/).
+ To run from source, you need a working version of [Python](http://python.org) 3.x installed and added to PATH, have [psutil](https://github.com/giampaolo/psutil) installed via pip, have [AutoHotKey](https://autohotkey.com/) installed, and the latest version of [PyWin32](https://sourceforge.net/projects/pywin32/).
 
 # How to use
 After the requirements are met, clone the repository to a safe location (or download as a ZIP):
