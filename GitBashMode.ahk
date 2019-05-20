@@ -2,10 +2,10 @@ toggle:=0
 
 <^<!t::
 if (toggle=0){
-  Run, cmdermode.vbs
+  Run, gitbashmode.vbs
   toggle:=!toggle
 } else {
-  Run, killcmder.vbs
+  Run, killgitbash.vbs
   toggle:=!toggle
 }
 Return
