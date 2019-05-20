@@ -8,8 +8,17 @@ temp_dir = os.path.dirname(os.path.realpath(__file__))
 parser = argparse.ArgumentParser(description="Guake for Windows")
 #parser.add_argument('-s', '--settings', help="Open settings", action='store_true')
 parser.add_argument('-v', '--verbose', help='Verbose mode', action='store_true')
+parser.add_argument('-m', '--mode', help="Sets what mode to use", action='store', type=str)
 #parser.add_argument('-d', '--default', help="Run with default settings", action='store_true')
 args = parser.parse_args()
+
+if args.mode=='' or 'winguake' in args.mode.lower():
+    WINDOWTEST = WINDOWS[0]
+elif 'bash' in args.mode.lower():
+    WINDOWTEST = WINDOWS[2]
+elif 'cmder' in args.mode.lower():
+    WINDOWTEST = WINDOWS[1]
+    
 if args.verbose:
     print("Running WinGuake in Verbose mode.")
 '''
