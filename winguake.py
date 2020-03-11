@@ -12,15 +12,7 @@ parser.add_argument('-v', '--verbose', help='Verbose mode', action='store_true')
 args = parser.parse_args()
 if args.verbose:
     print("Running WinGuake in Verbose mode.")
-'''
-if False:
-    if args.verbose:
-        print("Running settings...")
-    os.system('python edit_settings.py')
-    #change these around when compiling
-    #os.system('winguake_settings.exe')
-'''
-#else:
+
 if not is_running('console.exe') and not is_running('AutoHotkey.exe'):
     if args.verbose:
         print("WinGuake not started, starting program...")

@@ -50,6 +50,7 @@ def get_dir(path_to_log="./path.log"):
             else:
                 break
         return lines[line]
+        f.close()
     except Exception as e:
         print(e)
         return os.getenv("USERPROFILE")

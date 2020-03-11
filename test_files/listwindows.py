@@ -1,7 +1,8 @@
 import win32gui
 
 def enumHandler(hwnd, lParam):
-    if win32gui.IsWindowVisible(hwnd):
-        print(win32gui.GetWindowText(hwnd))
+    name = win32gui.GetWindowText(hwnd)
+    if win32gui.IsWindowVisible(hwnd) and name != "":
+        print(name)
 
 win32gui.EnumWindows(enumHandler, None)
